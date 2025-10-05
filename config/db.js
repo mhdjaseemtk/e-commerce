@@ -9,5 +9,7 @@ const connectDB = async () => {
   }
 };
 
+export const adminCollection = mongoose.connection.collection("admin");
+
 
 export default connectDB;
