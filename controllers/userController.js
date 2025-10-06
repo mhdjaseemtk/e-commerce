@@ -29,7 +29,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await users.findOne({ email });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ meassage: "user not found" });
     }
@@ -44,6 +44,5 @@ export const login = async (req, res) => {
     console.log(error.message);
   }
 };
-
 
 

@@ -10,6 +10,8 @@ const connectDB = async () => {
 };
 
 export const adminCollection = mongoose.connection.collection("admin");
+export const categoriesCollection = mongoose.connection.collection("categories");
+
 
 
 export default connectDB;

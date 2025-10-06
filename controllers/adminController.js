@@ -1,4 +1,4 @@
-import { adminCollection } from "../config/db.js";
+import { adminCollection,categoriesCollection } from "../config/db.js";
 import Product from "../models/productModel.js";
 import Category from "../models/categoryModel.js";
 import bcrypt from 'bcrypt'
@@ -36,16 +36,16 @@ export const adminlogin = async (req, res) => {
 
 export const createProduct = async (req,res)=>{
 
- const {name,description,price,category} = req.body
+ const {name,description,price,categoryname} = req.body
  try{
 
  
-    const categoryDetailes = await Category.findOne({category});
+    const categoryDetailes = await categoriesCollection.findOne({categoryname});
     if (!categoryDetailes) {
-      return res.status(400).json({ message: "Invalid category name ",category });
+      return res.status(400).json({ message: "Invalid category name ",categoryname });
     }
 
-    const existsProduct = await Product.findOne({name:name})
+    const existsProduct = await Product.findOne({name})
 if(existsProduct){
       return res.status(400).json({ message: "already exsisite ",name });
 }
@@ -122,7 +122,8 @@ export const deleteProduct = async (req, res) => {
  try{
 
  
-    const existsCategory = await categoryCollection.findOne({name});
+ 
+    const existsCategory = await Category.findOne({name});
     if (existsCategory) {
       return res.status(400).json({ message: " existsCategory ",name });
     }
@@ -181,6 +182,8 @@ export const deleteCategory = async (req, res) => {
 
 export const gettAllUser = async (req,res)=>{
   try {
+    console.log(req.user,req.User);
+    
   const getUsers = await User.find()
 res.status(200).json(getUsers)
   } catch (error) {
