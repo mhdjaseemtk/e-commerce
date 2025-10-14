@@ -13,6 +13,7 @@ export const addCart = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
+
     //finding user cart
     let cart = await Cart.findOne({ userId });
 
@@ -20,7 +21,7 @@ export const addCart = async (req, res) => {
     if (!cart) {
       cart = new Cart({
         userId,
-        items: [{ productId, quantity }],
+        items: [{ productId, quantity,price:product.price }],
       });
     } else {
       //  product already exists
@@ -33,7 +34,7 @@ export const addCart = async (req, res) => {
         existingItem.quantity += quantity;
       } else {
         //  new product adding
-        cart.items.push({ productId, quantity });
+        cart.items.push({ productId, quantity,price:product.price });
       }
     }
 

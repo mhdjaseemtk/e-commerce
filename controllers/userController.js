@@ -46,3 +46,17 @@ export const login = async (req, res) => {
 };
 
 
+
+export const userLoginOut= (req,res)=>{
+  req.session.destroy((error)=>{
+    if(error){
+      return res.send('error')
+    }
+    res.clearCookie("connect.sid").json({message:"loginout"})
+    
+    
+  })
+}
+
+
+

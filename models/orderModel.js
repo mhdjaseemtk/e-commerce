@@ -21,9 +21,9 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: "Pending",
   },
-  shippingAddress: {
-    type: String,
-  },
+  // shippingAddress: {
+  //   type: String,
+  // },
   orderDate: {
     type: Date,
     default: Date.now,

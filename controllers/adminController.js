@@ -3,6 +3,7 @@ import Product from "../models/productModel.js";
 import Category from "../models/categoryModel.js";
 import bcrypt from 'bcrypt'
 import User from "../models/userModel.js";
+import orderModel from "../models/orderModel.js";
 
 
 
@@ -190,4 +191,37 @@ res.status(200).json(getUsers)
     res.status(500).json(error.message)
   }
 
+}
+
+
+// get all orders
+
+export const getAllOrders = async(req,res)=>{
+  try{
+const order = await orderModel.find()
+res.status(200).json(order)
+  }
+  catch(error) {
+console.log(error);
+res.status(400).json({message:"error"})
+
+  }
+
+}
+
+
+
+// admin logout
+
+
+
+export const adminLoginOut= (req,res)=>{
+  req.session.destroy((error)=>{
+    if(error){
+      return res.send('error')
+    }
+    res.clearCookie("connect.sid").json({message:"loginout"})
+    
+    
+  })
 }

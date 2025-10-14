@@ -7,3 +7,12 @@ export const userAuth = (req,res,next)=>{
    }
    next()
 }
+
+
+export const adminAuth = (req,res,next)=>{
+   const adminId = req.session.adminId
+   if(!adminId){
+    return res.status(500).json({message:"unvalied admin"})
+   }
+   next()
+}
